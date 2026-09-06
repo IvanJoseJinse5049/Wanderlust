@@ -1,0 +1,673 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #222222;
+    background-color: #ffffff;
+}
+
+/* Navbar */
+
+.navbar {
+    height: 5rem;
+    background-color: #ffffff;
+    border-bottom: 1px solid #eeeeee;
+    padding: 0 2rem;
+}
+
+.fa-compass {
+    color: #fe424d;
+    font-size: 2rem;
+    margin-right: 0.5rem;
+}
+
+.nav-link {
+    color: #222222 !important;
+    margin-right: 1rem;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #fe424d !important;
+}
+
+
+/* Listings Page */
+
+.listings-page {
+    padding: 2rem 2.5rem 3rem;
+}
+
+.listings-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+
+/* Listing Cards */
+
+.listing-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.listing-card {
+    border: none !important;
+    background: transparent;
+    margin-bottom: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.listing-card:hover {
+    transform: translateY(-3px);
+}
+
+.listing-img {
+    width: 100%;
+    height: 16rem;
+    object-fit: cover;
+    border-radius: 1rem;
+    display: block;
+}
+
+.listing-card .card-body {
+    padding: 0.75rem 0.2rem;
+}
+
+.listing-card .card-text {
+    margin: 0;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+.listing-title {
+    font-weight: 600;
+}
+
+.listing-price {
+    font-weight: 500;
+}
+
+
+/* Footer */
+
+.f-info {
+    margin-top: 3rem;
+    min-height: 8rem;
+    padding: 2rem 1rem;
+
+    background-color: #f7f7f7;
+    border-top: 1px solid #eeeeee;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 0.8rem;
+
+    text-align: center;
+}
+
+.f-info-brand {
+    font-size: 0.9rem;
+    color: #555555;
+}
+
+.f-info-socials {
+    font-size: 1.3rem;
+}
+
+.f-info-socials i {
+    margin: 0 0.5rem;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.f-info-socials i:hover {
+    color: #fe424d;
+}
+
+.f-info-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.f-info-links a {
+    text-decoration: none;
+    color: #555555;
+    font-size: 0.9rem;
+}
+
+.f-info-links a:hover {
+    color: #222222;
+    text-decoration: underline;
+}
+
+
+/* Tablet */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        padding: 0 1rem;
+    }
+
+    .listings-page {
+        padding: 1.5rem 1rem 2rem;
+    }
+
+    .listings-title {
+        font-size: 1.5rem;
+    }
+
+    .listing-img {
+        height: 14rem;
+        border-radius: 0.8rem;
+    }
+}
+
+
+/* Mobile */
+
+@media (max-width: 576px) {
+
+    .navbar {
+        height: auto;
+        min-height: 4.5rem;
+        padding: 0 0.75rem;
+    }
+
+    .listings-page {
+        padding: 1rem 0.75rem 2rem;
+    }
+
+    .listings-title {
+        font-size: 1.4rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .listing-img {
+        height: 15rem;
+        border-radius: 0.8rem;
+    }
+
+    .listing-card {
+        margin-bottom: 1rem;
+    }
+
+    .f-info {
+        margin-top: 2rem;
+        min-height: 7rem;
+        padding: 1.5rem 1rem;
+    }
+
+    .f-info-links {
+        gap: 1rem;
+    }
+}
+
+/* New Listing Page */
+
+.new-listing-page {
+    min-height: 75vh;
+    padding: 3rem 1rem 4rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    background-color: #ffffff;
+}
+
+.new-listing-card {
+    width: 100%;
+    max-width: 650px;
+
+    padding: 2rem;
+
+    background-color: #ffffff;
+    border: 1px solid #eeeeee;
+    border-radius: 1rem;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.new-listing-card h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #222222;
+}
+
+.form-subtitle {
+    margin: 0.5rem 0 2rem;
+    color: #717171;
+    font-size: 0.95rem;
+}
+
+
+/* Form */
+
+.form-group {
+    margin-bottom: 1.3rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #222222;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+
+    padding: 0.8rem 0.9rem;
+
+    border: 1px solid #b0b0b0;
+    border-radius: 0.5rem;
+
+    font-family: inherit;
+    font-size: 0.95rem;
+
+    outline: none;
+
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #fe424d;
+
+    box-shadow: 0 0 0 2px rgba(254, 66, 77, 0.12);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #999999;
+}
+
+
+/* Price + Country */
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+
+/* Button */
+
+.create-listing-btn {
+    width: 100%;
+
+    padding: 0.85rem 1rem;
+
+    border: none;
+    border-radius: 0.5rem;
+
+    background-color: #fe424d;
+    color: white;
+
+    font-size: 1rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease,
+                transform 0.2s ease;
+}
+
+.create-listing-btn:hover {
+    background-color: #e63946;
+    transform: translateY(-1px);
+}
+
+.create-listing-btn:active {
+    transform: translateY(0);
+}
+
+
+/* Edit Listing Page */
+
+.edit-listing-page {
+    min-height: 75vh;
+    padding: 3rem 1rem 4rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    background-color: #ffffff;
+}
+
+.edit-listing-card {
+    width: 100%;
+    max-width: 650px;
+    padding: 2rem;
+
+    background-color: #ffffff;
+    border: 1px solid #eeeeee;
+    border-radius: 1rem;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.edit-listing-card h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #222222;
+}
+
+.edit-listing-card .form-subtitle {
+    margin: 0.5rem 0 2rem;
+    color: #717171;
+    font-size: 0.95rem;
+}
+
+.edit-listing-btn {
+    width: 100%;
+    padding: 0.85rem 1rem;
+
+    border: none;
+    border-radius: 0.5rem;
+
+    background-color: #fe424d;
+    color: white;
+
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+
+    transition: background-color 0.2s ease,
+                transform 0.2s ease;
+}
+
+.edit-listing-btn:hover {
+    background-color: #e63946;
+    transform: translateY(-1px);
+}
+
+.edit-listing-btn:active {
+    transform: translateY(0);
+}
+
+
+/* Tablet */
+
+@media (max-width: 768px) {
+
+    .new-listing-page {
+        padding: 2rem 1rem 3rem;
+    }
+
+    .new-listing-card {
+        padding: 1.5rem;
+    }
+
+    .edit-listing-page {
+        padding: 2rem 1rem 3rem;
+    }
+
+    .edit-listing-card {
+        padding: 1.5rem;
+    }
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 576px) {
+
+    .new-listing-page {
+        padding: 1.25rem 0.75rem 2rem;
+    }
+
+    .new-listing-card {
+        padding: 1.25rem;
+
+        border-radius: 0.8rem;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .new-listing-card h1 {
+        font-size: 1.5rem;
+    }
+
+    .edit-listing-page {
+        padding: 1.25rem 0.75rem 2rem;
+    }
+
+    .edit-listing-card {
+        padding: 1.25rem;
+        border-radius: 0.8rem;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .edit-listing-card h1 {
+        font-size: 1.5rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 1rem;
+        padding: 0.75rem;
+    }
+
+}
+/* Show Listing Page */
+
+.show-page {
+    min-height: 75vh;
+    padding: 3rem 1rem 4rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    background-color: #ffffff;
+}
+
+.show-card {
+    width: 100%;
+    max-width: 900px;
+
+    overflow: hidden;
+
+    background-color: #ffffff;
+    border: 1px solid #eeeeee;
+    border-radius: 1rem;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.show-image {
+    width: 100%;
+    height: 400px;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+.show-content {
+    padding: 2rem;
+}
+
+.show-content h1 {
+    margin: 0;
+
+    font-size: 2rem;
+    font-weight: 600;
+
+    color: #222222;
+}
+
+.show-location {
+    margin: 0.5rem 0 1.5rem;
+
+    color: #717171;
+    font-size: 1rem;
+}
+
+.show-details {
+    border-top: 1px solid #eeeeee;
+    padding-top: 1.5rem;
+}
+
+.show-description {
+    margin-bottom: 1rem;
+
+    color: #444444;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.show-price {
+    margin: 0;
+
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.show-price span {
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #717171;
+}
+
+
+/* Action Buttons */
+
+.show-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    margin-top: 2rem;
+}
+
+.show-edit-btn {
+    padding: 0.75rem 1.2rem;
+
+    border-radius: 0.5rem;
+
+    background-color: #fe424d;
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 0.95rem;
+    font-weight: 600;
+
+    transition: background-color 0.2s ease;
+}
+
+.show-edit-btn:hover {
+    background-color: #e63946;
+    color: white;
+}
+
+.show-delete-btn {
+    padding: 0.75rem 1.2rem;
+
+    border: 1px solid #dddddd;
+    border-radius: 0.5rem;
+
+    background-color: white;
+    color: #222222;
+
+    font-size: 0.95rem;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease,
+                border-color 0.2s ease;
+}
+
+.show-delete-btn:hover {
+    background-color: #f7f7f7;
+    border-color: #bbbbbb;
+}
+
+
+/* Tablet */
+
+@media (max-width: 768px) {
+
+    .show-page {
+        padding: 2rem 1rem 3rem;
+    }
+
+    .show-image {
+        height: 320px;
+    }
+
+    .show-content {
+        padding: 1.5rem;
+    }
+
+    .show-content h1 {
+        font-size: 1.7rem;
+    }
+}
+
+
+/* Mobile */
+
+@media (max-width: 576px) {
+
+    .show-page {
+        padding: 1.25rem 0.75rem 2rem;
+    }
+
+    .show-card {
+        border-radius: 0.8rem;
+    }
+
+    .show-image {
+        height: 250px;
+    }
+
+    .show-content {
+        padding: 1.25rem;
+    }
+
+    .show-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .show-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .show-edit-btn,
+    .show-delete-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
