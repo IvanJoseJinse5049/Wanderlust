@@ -7,7 +7,7 @@
         <h1>Create a New Listing</h1>
         <p class="form-subtitle">Add your property details below.</p>
 
-        <form method="POST" action="/listings">
+        <form method="POST" action="/listings" novalidate class="needs-validation">
 
             <div class="form-group">
                 <label for="title">Title</label>
@@ -15,9 +15,13 @@
                     id="title"
                     name="listing[title]"
                     type="text"
+                    class="form-control"
                     placeholder="Enter listing title"
                     required
                 >
+                <div class="invalid-feedback">
+                    Please provide a title.
+                </div>
             </div>
 
             <div class="form-group">
@@ -25,10 +29,14 @@
                 <textarea
                     id="description"
                     name="listing[description]"
+                    class="form-control"
                     placeholder="Describe your property"
                     rows="4"
                     required
                 ></textarea>
+                <div class="invalid-feedback">
+                    Please provide a description.
+                </div>
             </div>
 
             <div class="form-group">
@@ -37,9 +45,13 @@
                     id="image"
                     name="listing[image]"
                     type="text"
+                    class="form-control"
                     placeholder="Enter image URL"
                     required
                 >
+                <div class="invalid-feedback">
+                    Please provide an image URL.
+                </div>
             </div>
 
             <div class="form-row">
@@ -50,9 +62,13 @@
                         id="price"
                         name="listing[price]"
                         type="number"
+                        class="form-control"
                         placeholder="Enter price"
                         required
                     >
+                    <div class="invalid-feedback">
+                        Please provide a price.
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -61,9 +77,13 @@
                         id="country"
                         name="listing[country]"
                         type="text"
+                        class="form-control"
                         placeholder="Enter country"
                         required
                     >
+                    <div class="invalid-feedback">
+                        Please provide a country.
+                    </div>
                 </div>
 
             </div>
@@ -74,9 +94,13 @@
                     id="location"
                     name="listing[location]"
                     type="text"
+                    class="form-control"
                     placeholder="Enter location"
                     required
                 >
+                <div class="invalid-feedback">
+                    Please provide a location.
+                </div>
             </div>
 
             <button class="create-listing-btn" type="submit">
