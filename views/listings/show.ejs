@@ -51,8 +51,72 @@
 
             </div>
 
+            <div class="review-section">
+                <h2>Leave a Review</h2>
+
+                <form
+                    method="POST"
+                    action="/listings/<%= listing._id %>/reviews"
+                    class="review-form"
+                >
+                    <div class="review-field">
+                        <label for="rating">Rating</label>
+                        <select id="rating" name="review[rating]" required>
+                            <option value="">Select a rating</option>
+                            <option value="5">★★★★★ - 5</option>
+                            <option value="4">★★★★☆ - 4</option>
+                            <option value="3">★★★☆☆ - 3</option>
+                            <option value="2">★★☆☆☆ - 2</option>
+                            <option value="1">★☆☆☆☆ - 1</option>
+                        </select>
+                    </div>
+
+                    <div class="review-field">
+                        <label for="comment">Comment</label>
+                        <textarea
+                            id="comment"
+                            name="review[comment]"
+                            placeholder="Share your experience..."
+                            rows="5"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <button type="submit" class="review-submit-btn">
+                        Submit Review
+                    </button>
+                </form>
+            </div>
+
+            <div class="reviews-list">
+                <h2>Reviews</h2>
+
+                <% if (listing.reviews.length === 0) { %>
+                    <p>No reviews yet. Be the first to review!</p>
+                <% } else { %>
+                    <% listing.reviews.forEach(review => { %>
+                        <div class="review-card">
+                            <p class="review-rating">
+                                <%= "★".repeat(review.rating) %><%= "☆".repeat(5 - review.rating) %>
+                            </p>
+                            <p class="review-comment"><%= review.comment %></p>
+
+                            <form
+                                method="POST"
+                                action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+                            >
+                                <button type="submit" class="review-delete-btn">
+                                    Delete Review
+                                </button>
+                            </form>
+                        </div>
+                    <% }) %>
+                <% } %>
+            </div>
+
         </div>
 
     </div>
 
 </div>
+ 
