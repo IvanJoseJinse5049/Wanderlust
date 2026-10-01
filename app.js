@@ -47,7 +47,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 const sessionOptions = {
-  secret: "mysupersecretcode",
+  secret: process.env.SECRET || "defaultsecret",
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -59,7 +59,7 @@ const sessionOptions = {
 };
 const store = MongoStore.create({
   mongoUrl: process.env.ATLASDB_URL,
-  secret: "mysupersecretcode",
+  secret: process.env.SECRET || "defaultsecret",
   touchAfter: 24 * 60 * 60, // 24 hours
 });
 store.on("error", function (e) {
