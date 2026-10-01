@@ -85,9 +85,9 @@ passport.deserializeUser(User.deserializeUser());
 // ==================== ROUTES ====================
 
 // ---------- Home Route ----------
-// app.get('/',(req,res)=>{
-//     res.send("Hi i am root");
-// });
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
 
 // ---------- Listing Routes ----------
 app.use("/listings", listingRouter);
