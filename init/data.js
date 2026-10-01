@@ -349,4 +349,77 @@ const sampleListings = [
   },
 ];
 
+// These categories drive the icon filters. Images are deliberately assigned by
+// category so every seeded card visually matches the filter it appears under.
+const categoryByTitle = {
+  "Cozy Beachfront Cottage": "beach",
+  "Modern Loft in Downtown": "city",
+  "Mountain Retreat": "mountains",
+  "Historic Villa in Tuscany": "historic",
+  "Secluded Treehouse Getaway": "cabins",
+  "Beachfront Paradise": "beach",
+  "Rustic Cabin by the Lake": "cabins",
+  "Luxury Penthouse with City Views": "city",
+  "Ski-In/Ski-Out Chalet": "mountains",
+  "Safari Lodge in the Serengeti": "nature",
+  "Historic Canal House": "historic",
+  "Private Island Retreat": "beach",
+  "Charming Cottage in the Cotswolds": "cabins",
+  "Historic Brownstone in Boston": "historic",
+  "Beachfront Bungalow in Bali": "beach",
+  "Art Deco Apartment in Miami": "city",
+  "Mountain View Cabin in Banff": "mountains",
+  "Tropical Villa in Phuket": "beach",
+  "Historic Castle in Scotland": "historic",
+  "Desert Oasis in Dubai": "city",
+  "Rustic Log Cabin in Montana": "cabins",
+  "Beachfront Villa in Greece": "beach",
+  "Eco-Friendly Treehouse Retreat": "nature",
+  "Historic Cottage in Charleston": "historic",
+  "Modern Apartment in Tokyo": "city",
+  "Lakefront Cabin in New Hampshire": "cabins",
+  "Luxury Villa in the Maldives": "beach",
+  "Ski Chalet in Aspen": "mountains",
+  "Secluded Beach House in Costa Rica": "beach",
+};
+
+const categoryImages = {
+  beach: [
+    "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1493552152660-f915ab47ae9d?auto=format&fit=crop&w=1200&q=80",
+  ],
+  mountains: [
+    "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1200&q=80",
+  ],
+  city: [
+    "https://images.unsplash.com/photo-1444723121867-7a241cacace9?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1200&q=80",
+  ],
+  cabins: [
+    "https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1200&q=80",
+  ],
+  historic: [
+    "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
+  ],
+  nature: [
+    "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
+  ],
+};
+
+sampleListings.forEach((listing, index) => {
+  const category = categoryByTitle[listing.title];
+  const images = categoryImages[category];
+
+  listing.category = category;
+  listing.image = {
+    filename: `seed-${category}-${index + 1}`,
+    url: images[index % images.length],
+  };
+});
+
 module.exports = { data: sampleListings };

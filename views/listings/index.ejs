@@ -1,18 +1,72 @@
 <% layout("/layouts/boilerplate") %>
 
-<div class="listings-page">
-  <h1 class="listings-title">Explore stays</h1>
+<div class="listings-page" data-active-category="<%= activeCategory %>">
+  <div class="listings-header">
+    <div>
+      <h1 class="listings-title">Explore stays</h1>
+      <p id="listings-results" class="listings-results"><%= allListings.length %> stays found</p>
+    </div>
+    <label class="tax-toggle" for="tax-toggle-input">
+      <span>Show prices with 18% tax</span>
+      <input id="tax-toggle-input" type="checkbox" role="switch" aria-label="Show prices with 18% tax">
+      <span class="tax-toggle-track" aria-hidden="true"></span>
+    </label>
+  </div>
+
+  <form class="listing-search" action="/listings" method="GET" role="search">
+    <% if (activeCategory) { %>
+      <input type="hidden" name="category" value="<%= activeCategory %>">
+    <% } %>
+    <label class="visually-hidden" for="listing-search-input">Search listings</label>
+    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+    <input
+      id="listing-search-input"
+      name="q"
+      type="search"
+      value="<%= searchQuery %>"
+      placeholder="Search by property, location, or country"
+    >
+    <button type="submit">Search</button>
+  </form>
+
+  <nav class="listing-filters" aria-label="Listing categories">
+    <a href="/listings<%= searchQuery ? `?q=${encodeURIComponent(searchQuery)}` : "" %>" class="filter-item <%= !activeCategory ? "filter-item-active" : "" %>">
+      <i class="fa-solid fa-border-all" aria-hidden="true"></i>
+      <span>All</span>
+    </a>
+    <% filterCategories.forEach((category) => { %>
+      <a href="/listings?category=<%= category.value %><%= searchQuery ? `&q=${encodeURIComponent(searchQuery)}` : "" %>" class="filter-item <%= activeCategory === category.value ? "filter-item-active" : "" %>">
+        <i class="fa-solid <%= category.icon %>" aria-hidden="true"></i>
+        <span><%= category.label %></span>
+      </a>
+    <% }) %>
+  </nav>
+
+  <section class="no-listings" aria-live="polite" hidden>
+      <i class="fa-regular fa-compass" aria-hidden="true"></i>
+      <h2>No stays found</h2>
+      <p>Try another search or browse all stays.</p>
+      <a href="/listings">Clear filters</a>
+  </section>
 
   <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-4 listings-grid">
     <% for(let listing of allListings) { %>
-      <div class="col">
+      <div
+        class="col listing-result-card"
+        data-category="<%= listing.category || "" %>"
+        data-search-text="<%= [listing.title, listing.description, listing.location, listing.country].join(" ").toLowerCase() %>"
+      >
         <a href="/listings/<%= listing._id %>" class="listing-link">
           <div class="card listing-card h-100">
-            <img src="<%= listing.image.url %>" class="card-img-top listing-img" alt="list-image">
+            <img src="<%= listing.image.url %>" class="card-img-top listing-img" alt="<%= listing.title %>">
             <div class="card-body">
               <p class="card-text">
                 <span class="listing-title"><%= listing.title %></span><br>
-                <span class="listing-price">&#8377; <%= listing.price.toLocaleString("en-IN") %> / night</span>
+                <span class="listing-location"><%= listing.location %>, <%= listing.country %></span><br>
+                <span class="listing-price" data-base-price="<%= listing.price %>">
+                  &#8377; <span class="price-amount"><%= listing.price.toLocaleString("en-IN") %></span>
+                  <span class="price-tax-label">before taxes</span> / night
+                </span>
               </p>
             </div>
           </div>

@@ -19,6 +19,11 @@
             </p>
 
             <div class="show-details">
+                <% if (listing.owner) { %>
+                    <p class="show-owner">
+                        <strong>Owner:</strong> <%= listing.owner.username %>
+                    </p>
+                <% } %>
 
                 <p class="show-description">
                     <%= listing.description %>
@@ -31,84 +36,109 @@
 
             </div>
 
-            <div class="show-actions">
+            <section class="listing-map-section" aria-labelledby="listing-map-heading">
+                <h2 id="listing-map-heading">Where you'll stay</h2>
+                <div
+                    id="listing-map"
+                    class="listing-map"
+                    data-location="<%= listing.location %>, <%= listing.country %>"
+                    data-map-token="<%= mapToken %>"
+                ></div>
+            </section>
 
-                <a
-                    href="/listings/<%= listing._id %>/edit"
-                    class="show-edit-btn"
-                >
-                    Edit this Listing
-                </a>
+            <% if (listing.owner && currentUser && listing.owner._id.equals(currentUser._id)) { %>
+                <div class="show-actions">
+                    <a href="/listings/<%= listing._id %>/edit" class="show-edit-btn">Edit</a>
 
-                <form
-                    method="POST"
-                    action="/listings/<%= listing._id %>?_method=DELETE"
-                >
-                    <button class="show-delete-btn">
-                        Delete this Listing
-                    </button>
-                </form>
+                    <form
+                        method="POST"
+                        action="/listings/<%= listing._id %>?_method=DELETE"
+                        class="show-delete-form"
+                    >
+                        <button type="submit" class="show-delete-btn">Delete</button>
+                    </form>
+                </div>
+            <% } %>
 
-            </div>
 
-            <div class="review-section">
-                <h2>Leave a Review</h2>
 
-                <form
-                    method="POST"
-                    action="/listings/<%= listing._id %>/reviews"
-                    class="review-form"
-                >
-                    <div class="review-field">
-                        <label for="rating">Rating</label>
-                        <select id="rating" name="review[rating]" required>
-                            <option value="">Select a rating</option>
-                            <option value="5">★★★★★ - 5</option>
-                            <option value="4">★★★★☆ - 4</option>
-                            <option value="3">★★★☆☆ - 3</option>
-                            <option value="2">★★☆☆☆ - 2</option>
-                            <option value="1">★☆☆☆☆ - 1</option>
-                        </select>
-                    </div>
+            <section class="reviews-area">
+                <% if (currentUser) { %>
+                    <h2 class="reviews-heading">Leave a Review</h2>
 
-                    <div class="review-field">
-                        <label for="comment">Comment</label>
-                        <textarea
-                            id="comment"
-                            name="review[comment]"
-                            placeholder="Share your experience..."
-                            rows="5"
-                            required
-                        ></textarea>
-                    </div>
+                    <form
+                        method="POST"
+                        action="/listings/<%= listing._id %>/reviews"
+                        class="review-form"
+                    >
+                        <div class="review-field">
+                            <fieldset class="starability-fade">
+                                <legend>Rating</legend>
+                                <input type="radio" id="no-rate-<%= listing._id %>" class="input-no-rate" name="review[rating]" value="" checked aria-label="No rating selected" required>
+                                <input type="radio" id="first-rate-<%= listing._id %>" name="review[rating]" value="1">
+                                <label for="first-rate-<%= listing._id %>" title="Terrible">1 star</label>
+                                <input type="radio" id="second-rate-<%= listing._id %>" name="review[rating]" value="2">
+                                <label for="second-rate-<%= listing._id %>" title="Not good">2 stars</label>
+                                <input type="radio" id="third-rate-<%= listing._id %>" name="review[rating]" value="3">
+                                <label for="third-rate-<%= listing._id %>" title="Average">3 stars</label>
+                                <input type="radio" id="fourth-rate-<%= listing._id %>" name="review[rating]" value="4">
+                                <label for="fourth-rate-<%= listing._id %>" title="Very good">4 stars</label>
+                                <input type="radio" id="fifth-rate-<%= listing._id %>" name="review[rating]" value="5">
+                                <label for="fifth-rate-<%= listing._id %>" title="Amazing">5 stars</label>
+                                <span class="starability-focus-ring"></span>
+                            </fieldset>
+                        </div>
 
-                    <button type="submit" class="review-submit-btn">
-                        Submit Review
-                    </button>
-                </form>
-            </div>
+                        <div class="review-field">
+                            <label for="comment">Comment</label>
+                            <textarea
+                                id="comment"
+                                name="review[comment]"
+                                placeholder="Share your experience..."
+                                rows="5"
+                                required
+                            ></textarea>
+                        </div>
+
+                        <button type="submit" class="review-submit-btn">
+                            Submit Review
+                        </button>
+                    </form>
+                <% } else { %>
+                    <h2 class="reviews-heading">Leave a Review</h2>
+                    <p class="review-login-message">
+                        Please <a href="/login">log in</a> to leave a review.
+                    </p>
+                <% } %>
+            </section>
 
             <div class="reviews-list">
-                <h2>Reviews</h2>
+                <h2 class="reviews-list-header">Reviews</h2>
 
                 <% if (listing.reviews.length === 0) { %>
-                    <p>No reviews yet. Be the first to review!</p>
+                    <p class="reviews-empty">No reviews yet. Be the first to review!</p>
                 <% } else { %>
                     <% listing.reviews.forEach(review => { %>
                         <div class="review-card">
-                            <p class="review-rating">
-                                <%= "★".repeat(review.rating) %><%= "☆".repeat(5 - review.rating) %>
+                            <% if (review.author) { %>
+                                <p class="review-author">
+                                    <strong><%= review.author.username %></strong>
+                                </p>
+                            <% } %>
+
+                            <p class="review-rating starability-result" data-rating="<%= review.rating %>">
+                                Rated <%= review.rating %> out of 5 stars
                             </p>
                             <p class="review-comment"><%= review.comment %></p>
-
-                            <form
-                                method="POST"
-                                action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
-                            >
-                                <button type="submit" class="review-delete-btn">
-                                    Delete Review
-                                </button>
-                            </form>
+                            <% if (currentUser && review.author && review.author._id.equals(currentUser._id)) { %>
+                                <form
+                                    method="POST"
+                                    action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                    class="review-delete-form"
+                                >
+                                    <button type="submit" class="review-delete-btn">Delete</button>
+                                </form>
+                            <% } %>
                         </div>
                     <% }) %>
                 <% } %>
@@ -119,4 +149,40 @@
     </div>
 
 </div>
- 
+
+<script>
+    (() => {
+        const mapElement = document.getElementById("listing-map");
+        if (!mapElement || !mapElement.dataset.mapToken) return;
+
+        const location = mapElement.dataset.location;
+        const token = mapElement.dataset.mapToken;
+        const geocodeUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(location)}.json?access_token=${encodeURIComponent(token)}&limit=1`;
+
+        fetch(geocodeUrl)
+            .then((response) => response.json())
+            .then((data) => {
+                const feature = data.features && data.features[0];
+                if (!feature) {
+                    mapElement.textContent = "Location unavailable";
+                    return;
+                }
+
+                const [longitude, latitude] = feature.center;
+                mapboxgl.accessToken = token;
+                const map = new mapboxgl.Map({
+                    container: mapElement,
+                    style: "mapbox://styles/mapbox/streets-v12",
+                    center: [longitude, latitude],
+                    zoom: 10,
+                });
+
+                new mapboxgl.Marker({ color: "#fe424d" })
+                    .setLngLat([longitude, latitude])
+                    .addTo(map);
+            })
+            .catch(() => {
+                mapElement.textContent = "Location unavailable";
+            });
+    })();
+</script>

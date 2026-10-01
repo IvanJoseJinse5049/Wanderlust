@@ -7,7 +7,7 @@
         <h1>Create a New Listing</h1>
         <p class="form-subtitle">Add your property details below.</p>
 
-        <form method="POST" action="/listings" novalidate class="needs-validation">
+        <form method="POST" action="/listings" enctype="multipart/form-data" novalidate class="needs-validation">
 
             <div class="form-group">
                 <label for="title">Title</label>
@@ -40,17 +40,17 @@
             </div>
 
             <div class="form-group">
-                <label for="image">Image URL</label>
+                <label for="image">Listing Image</label>
                 <input
                     id="image"
-                    name="listing[image]"
-                    type="text"
+                    name="image"
+                    type="file"
+                    accept="image/*"
                     class="form-control"
-                    placeholder="Enter image URL"
                     required
                 >
                 <div class="invalid-feedback">
-                    Please provide an image URL.
+                    Please choose an image.
                 </div>
             </div>
 
@@ -100,6 +100,22 @@
                 >
                 <div class="invalid-feedback">
                     Please provide a location.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select id="category" name="listing[category]" class="form-control" required>
+                    <option value="" selected disabled>Select a category</option>
+                    <option value="beach">Beach</option>
+                    <option value="mountains">Mountains</option>
+                    <option value="city">City</option>
+                    <option value="cabins">Cabins</option>
+                    <option value="historic">Historic</option>
+                    <option value="nature">Nature</option>
+                </select>
+                <div class="invalid-feedback">
+                    Please select a category.
                 </div>
             </div>
 

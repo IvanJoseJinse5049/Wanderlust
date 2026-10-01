@@ -5,7 +5,7 @@
     <h1>Edit your Listing</h1>
     <p class="form-subtitle">Update the details of your property.</p>
 
-    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
+    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" enctype="multipart/form-data">
 
       <div class="form-group">
         <label for="title">Title</label>
@@ -29,13 +29,22 @@
       </div>
 
       <div class="form-group">
-        <label for="image">Image URL</label>
+        <label>Current Image</label>
+        <div class="current-image-preview">
+          <img
+            src="<%= listing.image && listing.image.url ? listing.image.url : 'https://thumbs.dreamstime.com/b/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available-236105299.jpg' %>"
+            alt="Current image for <%= listing.title %>"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="image">Replace Image <span>(optional)</span></label>
         <input
           id="image"
-          name="listing[image]"
-          value="<%= listing.image %>"
-          type="text"
-          required
+          name="image"
+          type="file"
+          accept="image/*"
         />
       </div>
 
@@ -72,6 +81,18 @@
           type="text"
           required
         />
+      </div>
+
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select id="category" name="listing[category]" required>
+          <option value="beach" <%= listing.category === "beach" ? "selected" : "" %>>Beach</option>
+          <option value="mountains" <%= listing.category === "mountains" ? "selected" : "" %>>Mountains</option>
+          <option value="city" <%= listing.category === "city" ? "selected" : "" %>>City</option>
+          <option value="cabins" <%= listing.category === "cabins" ? "selected" : "" %>>Cabins</option>
+          <option value="historic" <%= listing.category === "historic" ? "selected" : "" %>>Historic</option>
+          <option value="nature" <%= listing.category === "nature" ? "selected" : "" %>>Nature</option>
+        </select>
       </div>
 
       <button class="edit-listing-btn" type="submit">Save Changes</button>
